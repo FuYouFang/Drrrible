@@ -18,9 +18,9 @@ struct User: ModelType {
   var bio: String?
   var isPro: Bool
 
-  var shotCount: Int
-  var followerCount: Int
-  var followingCount: Int
+  var shotCount: Int? = 0
+  var followerCount: Int? = 0
+  var followingCount: Int? = 0
 
   enum CodingKeys: String, CodingKey {
     case id = "id"

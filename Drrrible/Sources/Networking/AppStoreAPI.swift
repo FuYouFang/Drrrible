@@ -10,33 +10,33 @@ import Moya
 import MoyaSugar
 
 enum AppStoreAPI {
-  case lookup(bundleID: String)
+    case lookup(bundleID: String)
 }
 
 extension AppStoreAPI: SugarTargetType {
-  var baseURL: URL {
-    return URL(string: "https://itunes.apple.com")!
-  }
-
-  var route: Route {
-    switch self {
-    case .lookup:
-      return .get("lookup")
+    var baseURL: URL {
+        return URL(string: "https://itunes.apple.com")!
     }
-  }
-
-  var parameters: Parameters? {
-    switch self {
-    case let .lookup(bundleID):
-      return ["bundleId": bundleID]
+    
+    var route: Route {
+        switch self {
+        case .lookup:
+            return .get("lookup")
+        }
     }
-  }
-
-  var headers: [String: String]? {
-    return nil
-  }
-
-  var sampleData: Data {
-    return Data()
-  }
+    
+    var parameters: Parameters? {
+        switch self {
+        case let .lookup(bundleID):
+            return ["bundleId": bundleID]
+        }
+    }
+    
+    var headers: [String: String]? {
+        return nil
+    }
+    
+    var sampleData: Data {
+        return Data()
+    }
 }

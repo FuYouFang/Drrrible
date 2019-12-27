@@ -11,22 +11,22 @@ import RxCocoa
 import RxSwift
 
 final class ShotViewTitleCellReactor: Reactor {
-  typealias Action = NoAction
-  
-  struct State {
-    var avatarURL: URL?
-    var title: String
-    var username: String
-  }
-
-  let initialState: State
-
-  init(shot: Shot) {
-    self.initialState = State(
-      avatarURL: shot.user.avatarURL,
-      title: shot.title,
-      username: shot.user.name
-    )
-    _ = self.state
-  }
+    typealias Action = NoAction
+    
+    struct State {
+        var avatarURL: URL?
+        var title: String
+        var username: String?
+    }
+    
+    let initialState: State
+    
+    init(shot: Shot) {
+        self.initialState = State(
+            avatarURL: shot.user?.avatarURL,
+            title: shot.title,
+            username: shot.user?.name
+        )
+        _ = self.state
+    }
 }

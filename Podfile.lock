@@ -186,7 +186,7 @@ DEPENDENCIES:
   - URLNavigator
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Carte
     - CGFloatLiteral
@@ -299,4 +299,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fd5b1bb543fad34e10b49b47a50a246c1f613d21
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4

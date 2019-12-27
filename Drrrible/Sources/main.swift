@@ -9,13 +9,13 @@
 import UIKit
 
 private func appDelegateClassName() -> String {
-  let isTesting = NSClassFromString("XCTestCase") != nil
-  return isTesting ? "DrrribleTests.StubAppDelegate" : NSStringFromClass(AppDelegate.self)
+    let isTesting = NSClassFromString("XCTestCase") != nil
+    return isTesting ? "DrrribleTests.StubAppDelegate" : NSStringFromClass(AppDelegate.self)
 }
 
 _ = UIApplicationMain(
-  CommandLine.argc,
-  CommandLine.unsafeArgv,
-  NSStringFromClass(UIApplication.self),
-  appDelegateClassName()
+    CommandLine.argc,
+    CommandLine.unsafeArgv,
+    NSStringFromClass(UIApplication.self),
+    appDelegateClassName()
 )
