@@ -11,11 +11,11 @@ import Stubber
 @testable import Drrrible
 
 final class StubUserService: UserServiceType {
-  var currentUser: Observable<User?> {
-    return .never()
-  }
-
-  func fetchMe() -> Single<Void> {
-    return Stubber.invoke(fetchMe, args: (), default: .never())
-  }
+    var currentUser: Observable<User?> {
+        return .never()
+    }
+    
+    func fetchMe() -> Single<Void> {
+        return Stubber.invoke(fetchMe, args: (), default: .never())
+    }
 }

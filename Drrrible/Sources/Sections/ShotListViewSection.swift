@@ -9,23 +9,23 @@
 import RxDataSources
 
 enum ShotListViewSection {
-  case shotTile([ShotListViewSectionItem])
+    case shotTile([ShotListViewSectionItem])
 }
 
 extension ShotListViewSection: SectionModelType {
-  var items: [ShotListViewSectionItem] {
-    switch self {
-    case .shotTile(let items): return items
+    var items: [ShotListViewSectionItem] {
+        switch self {
+        case .shotTile(let items): return items
+        }
     }
-  }
-
-  init(original: ShotListViewSection, items: [ShotListViewSectionItem]) {
-    switch original {
-    case .shotTile: self = .shotTile(items)
+    
+    init(original: ShotListViewSection, items: [ShotListViewSectionItem]) {
+        switch original {
+        case .shotTile: self = .shotTile(items)
+        }
     }
-  }
 }
 
 enum ShotListViewSectionItem {
-  case shotTile(ShotCellReactor)
+    case shotTile(ShotCellReactor)
 }

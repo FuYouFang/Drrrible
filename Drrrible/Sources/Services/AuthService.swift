@@ -29,6 +29,21 @@ protocol AuthServiceType {
     func logout()
 }
 
+#warning("""
+    鉴权 service 的设计
+
+    1. service 当中会出现 viewController 的属性
+    2. service 会根据需求创建一个 viewController，跟使用 navigator 弹出 viewController
+
+    事件流程
+    1. 方法：外界调用鉴权 -> 返回一个鉴权结果的数据流
+    2. 详细流程： 外界调用鉴权
+               -> 创建并记录用于鉴权的 ViewControler
+               -> 鉴权 ViewController 调用方法通知结果
+               -> 根据处理鉴权结果生成 Token 的事件流
+               -> 隐藏鉴权 ViewController
+               —> 记录并保存 Token
+   """)
 final class AuthService: AuthServiceType {
     
     fileprivate let clientID = "130182af71afe5247b857ef622bd344ca5f1c6144c8fa33c932628ac31c5ad78"
@@ -40,6 +55,7 @@ final class AuthService: AuthServiceType {
     fileprivate let keychain = Keychain(service: "com.drrrible.ios")
     private(set) var currentAccessToken: AccessToken?
     
+    // 此处使用的协议，而非具体的类
     private let navigator: NavigatorType
     
     init(navigator: NavigatorType) {
@@ -65,6 +81,7 @@ final class AuthService: AuthServiceType {
         self.navigator.present(navigationController)
         self.currentViewController = navigationController
         
+        #warning("通过 do 将必要的信息进行保存")
         return self.callbackSubject
             .flatMap(self.accessToken)
             .do(onNext: { [weak self] accessToken in
@@ -74,6 +91,7 @@ final class AuthService: AuthServiceType {
             .map { _ in }
     }
     
+   
     func callback(code: String) {
         self.callbackSubject.onNext(code)
         self.currentViewController?.dismiss(animated: true, completion: nil)
@@ -99,7 +117,7 @@ final class AuthService: AuthServiceType {
                     switch response.result {
                     case let .success(jsonData):
                         do {
-                            let accessToken = try JSONDecoder().decode(AccessToken.self, from: jsonData)
+                            let accessToken = try AccessToken.decoder.decode(AccessToken.self, from: jsonData)
                             observer(.success(accessToken))
                         } catch let error {
                             observer(.error(error))

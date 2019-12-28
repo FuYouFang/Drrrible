@@ -9,12 +9,12 @@
 import Foundation
 
 func fixture<T: Decodable>(_ json: [String: Any?]) -> T {
-  do {
-    let data = try JSONSerialization.data(withJSONObject: json.filterNil(), options: [])
-    let decoder = JSONDecoder()
-    decoder.dateDecodingStrategy = .iso8601
-    return try decoder.decode(T.self, from: data)
-  } catch let error {
-    fatalError(String(describing: error))
-  }
+    do {
+        let data = try JSONSerialization.data(withJSONObject: json.filterNil(), options: [])
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try decoder.decode(T.self, from: data)
+    } catch let error {
+        fatalError(String(describing: error))
+    }
 }

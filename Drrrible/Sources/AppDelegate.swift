@@ -26,6 +26,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        // 将 appdelegate 中的代码抽离到一个 dependency 中
+        // dependency 当中提供
+        // 1. SDK 的初始化
+        // 2. 外观的设置
+        // 3. 返回 window
         self.dependency = self.dependency ?? CompositionRoot.resolve()
         self.dependency.configureSDKs()
         self.dependency.configureAppearance()

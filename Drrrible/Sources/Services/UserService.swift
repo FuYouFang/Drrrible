@@ -14,6 +14,10 @@ protocol UserServiceType {
     func fetchMe() -> Single<Void>
 }
 
+#warning("""
+1. 需要向外提供一个 user 的 Observable，所以有设置了 currentUser 属性
+2. 内部需要管理一个 user 的变化，所以有设置了 userSubject 属性
+""")
 final class UserService: UserServiceType {
     fileprivate let networking: DrrribleNetworking
     

@@ -11,16 +11,16 @@ import RxCocoa
 import RxSwift
 
 final class SettingItemCellReactor: Reactor {
-  typealias Action = NoAction
-  struct State {
-    var text: String?
-    var detailText: String?
-  }
-
-  let initialState: State
-
-  init(text: String?, detailText: String?) {
-    self.initialState = State(text: text, detailText: detailText)
-    _ = self.state
-  }
+    typealias Action = NoAction
+    struct State {
+        var text: String?
+        var detailText: String?
+    }
+    
+    let initialState: State
+    
+    init(text: String?, detailText: String?) {
+        self.initialState = State(text: text, detailText: detailText)
+        _ = self.state
+    }
 }
