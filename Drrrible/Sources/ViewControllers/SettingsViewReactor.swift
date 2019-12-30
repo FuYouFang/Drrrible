@@ -11,11 +11,16 @@ import RxCocoa
 import RxSwift
 
 #warning("""
-在 SettingsViewReactor 的 state 的 sections 中有一个用于表示登录状态的项，即 logout。
-这个 logout 中的 username 会根据当前登录的用户信息进行改变，同时也会根据自己的 Action 进行改变。
+SettingsViewController 对应 Reactor 为 SettingsViewReactor。
+在 SettingsViewReactor 中 state 的 sections 中有一个用于表示登录状态的项，即 logout。
+SettingsViewController 中的 username 需要根据当前登录的用户信息进行改变，同时也需要会根据 Reactor 中的 Action 进行改变。
 
-SettingsViewReactor 的 state 在初始化时，只负责将 username 设置为了 nil，它不负责 username 的更改。
-username 只根据 userService.currentUser 进行改变。
+在 SettingsViewReactor 中将自己的 Action 的 Observable 和 userService.currentUser 的 Observable 进行了合并，使用的方法时：
+```
+
+```
+
+SettingsViewReactor 的 state 在初始化时，只负责将 username 设置为了 nil，userService.currentUser 的 Observable 负责发出 username 的更改的事件。
 
 """)
 
@@ -64,18 +69,17 @@ final class SettingsViewReactor: Reactor {
         _ = self.state
     }
     
-    #warning("""
-    SettingsViewReactor 除了自身的 action 需要监听之外，还需要根据
-    userService 的 currentUser 改变而改变，
-    所以在 ReactorKit 框架的 transform 方法中，将两个数据流进行了合并
-    
-    """)
+    /*
+    SettingsViewReactor 不仅要提供自身的 action 的状态 Observable，
+     还需要结合 userService 的 currentUser 的状态 Observable。
+     所以在 ReactorKit 框架的 transform 方法中，将两个数据流进行了合并。
+    */
     func transform(action: Observable<Action>) -> Observable<Action> {
         let updateCurrentUsername = self.userService.currentUser
             .map {
                 Action.updateCurrentUsername($0?.name)
             }
-        // 将自身的 action Observable，和由 currentUser 转化而来的 updateCurrentUsername 进行了合并
+        // 将自身的 action Observable，和由 currentUser 转化而来的 Observable 进行了合并
         return Observable.of(action, updateCurrentUsername).merge()
     }
     

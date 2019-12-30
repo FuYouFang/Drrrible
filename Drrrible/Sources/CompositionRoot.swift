@@ -115,16 +115,25 @@ final class CompositionRoot {
                 analytics: analytics,
                 shotTileCellDependency: shotTileCellDependency
             )
+            
+            let versionViewControllerFactory: () -> BaseViewController = {
+                
+                // 原作者实现的方式
+                let reactor = VersionViewReactor(appStoreService: appStoreService)
+                return VersionViewController(reactor: reactor)
+                
+                // 原作者是使用一个 state 来控制两个 cell 的显示
+                // 下面的实现方式，是使用一个控制 cell 显示的 Reacter 数组来实现
+                // let reactor = VersionViewReactor_1(appStoreService: appStoreService)
+                // return VersionViewController_1(reactor: reactor)
+            }
             let mainTabBarController = MainTabBarController(
                 reactor: MainTabBarViewReactor(),
                 shotListViewController: shotListViewController,
                 settingsViewController: SettingsViewController(
                     reactor: SettingsViewReactor(userService: userService),
                     analytics: analytics,
-                    versionViewControllerFactory: {
-                        let reactor = VersionViewReactor(appStoreService: appStoreService)
-                        return VersionViewController(reactor: reactor)
-                },
+                    versionViewControllerFactory: versionViewControllerFactory,
                     presentLoginScreen: presentLoginScreen
                 )
             )

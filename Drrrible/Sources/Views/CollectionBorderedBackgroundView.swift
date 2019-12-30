@@ -9,12 +9,15 @@
 import UIKit
 
 final class CollectionBorderedBackgroundView: UICollectionReusableView {
-  override class var layerClass: AnyClass {
-    return BorderedLayer.self
-  }
-
-  override func layoutSublayers(of layer: CALayer) {
-    super.layoutSublayers(of: layer)
-    self.layer.frame.size = self.bounds.size
-  }
+    #warning("""
+    通过 layerClass 直接更换掉 layer
+    """)
+    override class var layerClass: AnyClass {
+        return BorderedLayer.self
+    }
+    
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: layer)
+        self.layer.frame.size = self.bounds.size
+    }
 }

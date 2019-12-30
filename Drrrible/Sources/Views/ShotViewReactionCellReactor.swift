@@ -11,19 +11,20 @@ import RxSwift
 import ReactorKit
 
 final class ShotViewReactionCellReactor: Reactor {
-  typealias Action = NoAction
-
-  let initialState: Void = Void()
-  let likeButtonViewReactor: ShotViewReactionButtonViewReactor
-  let commentButtonViewReactor: ShotViewReactionButtonViewReactor
-
-  init(
-    shot: Shot,
-    likeButtonViewReactorFactory: (Shot) -> ShotViewReactionLikeButtonViewReactor,
-    commentButtonViewReactorFactory: (Shot) -> ShotViewReactionCommentButtonViewReactor
-  ) {
-    self.likeButtonViewReactor = likeButtonViewReactorFactory(shot)
-    self.commentButtonViewReactor = commentButtonViewReactorFactory(shot)
-    _ = self.state
-  }
+    typealias Action = NoAction
+    
+    #warning("state 为 Void 的情况")
+    let initialState: Void = Void()
+    let likeButtonViewReactor: ShotViewReactionButtonViewReactor
+    let commentButtonViewReactor: ShotViewReactionButtonViewReactor
+    
+    init(
+        shot: Shot,
+        likeButtonViewReactorFactory: (Shot) -> ShotViewReactionLikeButtonViewReactor,
+        commentButtonViewReactorFactory: (Shot) -> ShotViewReactionCommentButtonViewReactor
+    ) {
+        self.likeButtonViewReactor = likeButtonViewReactorFactory(shot)
+        self.commentButtonViewReactor = commentButtonViewReactorFactory(shot)
+        _ = self.state
+    }
 }

@@ -9,28 +9,28 @@
 import RxDataSources
 
 enum ShotViewSection {
-  case shot([ShotViewSectionItem])
-  case comment([ShotViewSectionItem])
+    case shot([ShotViewSectionItem])
+    case comment([ShotViewSectionItem])
 }
 
 extension ShotViewSection: SectionModelType {
-  var items: [ShotViewSectionItem] {
-    switch self {
-    case .shot(let items): return items
-    case .comment(let items): return items
+    var items: [ShotViewSectionItem] {
+        switch self {
+        case .shot(let items): return items
+        case .comment(let items): return items
+        }
     }
-  }
-
-  init(original: ShotViewSection, items: [ShotViewSectionItem]) {
-    switch original {
-    case .shot: self = .shot(items)
-    case .comment: self = .comment(items)
+    
+    init(original: ShotViewSection, items: [ShotViewSectionItem]) {
+        switch original {
+        case .shot: self = .shot(items)
+        case .comment: self = .comment(items)
+        }
     }
-  }
 }
 
 enum ShotViewSectionItem {
-  case shot(ShotSectionReactor.SectionItem)
-  case comment(ShotViewCommentCellReactor)
-  case activityIndicator
+    case shot(ShotSectionReactor.SectionItem)
+    case comment(ShotViewCommentCellReactor)
+    case activityIndicator
 }

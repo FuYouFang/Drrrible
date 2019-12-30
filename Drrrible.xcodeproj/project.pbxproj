@@ -135,6 +135,8 @@
 		03FE6AF61F23C96E005D04DA /* ShotTileCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FE6AF51F23C96E005D04DA /* ShotTileCellSpec.swift */; };
 		67CCAEC7ACD021B25D286650 /* Pods_Drrrible_DrrribleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3800977F199DEFED1D747AA /* Pods_Drrrible_DrrribleTests.framework */; };
 		7016FEC9D52ED214CF18F95B /* Pods_Drrrible.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF2B5CCF3B37FF7DB8227C2 /* Pods_Drrrible.framework */; };
+		C55007C523B8310D00497079 /* VersionViewController_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55007C423B8310D00497079 /* VersionViewController_1.swift */; };
+		C55007C723B831E700497079 /* VersionViewReactor_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55007C623B831E700497079 /* VersionViewReactor_1.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -283,6 +285,8 @@
 		5D52274A9E04CB3BBEDA2172 /* Pods-DrrribleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrrribleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DrrribleTests/Pods-DrrribleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7FDE13E3B73333B79F505120 /* Pods-Drrrible-DrrribleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Drrrible-DrrribleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Drrrible-DrrribleTests/Pods-Drrrible-DrrribleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C3800977F199DEFED1D747AA /* Pods_Drrrible_DrrribleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Drrrible_DrrribleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C55007C423B8310D00497079 /* VersionViewController_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController_1.swift; sourceTree = "<group>"; };
+		C55007C623B831E700497079 /* VersionViewReactor_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewReactor_1.swift; sourceTree = "<group>"; };
 		D1C26B69DF4A8650DD5E1E2F /* Pods-Drrrible.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Drrrible.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Drrrible/Pods-Drrrible.debug.xcconfig"; sourceTree = "<group>"; };
 		D79B5590B9DCC5274E4845E7 /* Pods-DrrribleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrrribleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DrrribleTests/Pods-DrrribleTests.release.xcconfig"; sourceTree = "<group>"; };
 		F815D70CC1ED4DAC3A2A8F36 /* Pods-Drrrible-DrrribleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Drrrible-DrrribleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Drrrible-DrrribleTests/Pods-Drrrible-DrrribleTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -621,7 +625,9 @@
 				038B69021E72A466006B44F9 /* SettingsViewController.swift */,
 				038B69041E72A46D006B44F9 /* SettingsViewReactor.swift */,
 				034D33511EA68746004498FB /* VersionViewController.swift */,
+				C55007C423B8310D00497079 /* VersionViewController_1.swift */,
 				034D33531EA68755004498FB /* VersionViewReactor.swift */,
+				C55007C623B831E700497079 /* VersionViewReactor_1.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1224,7 +1230,9 @@
 				038B69111E7318FE006B44F9 /* UICollectionView+Rx.swift in Sources */,
 				03DF950B1E6EAB7900E31665 /* BaseViewController.swift in Sources */,
 				038B690B1E72A68B006B44F9 /* BaseTableViewCell.swift in Sources */,
+				C55007C723B831E700497079 /* VersionViewReactor_1.swift in Sources */,
 				031EB06B1E7001FF004D6349 /* DribbbleAPI.swift in Sources */,
+				C55007C523B8310D00497079 /* VersionViewController_1.swift in Sources */,
 				03DF95191E6EB2D800E31665 /* LoginViewController.swift in Sources */,
 				0377C5551E745BF000EE4576 /* ShotViewReactor.swift in Sources */,
 				03DF94EF1E6EA76A00E31665 /* AppDelegate.swift in Sources */,

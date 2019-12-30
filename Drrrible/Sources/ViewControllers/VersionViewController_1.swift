@@ -1,22 +1,23 @@
 //
-//  VersionViewController.swift
+//  VersionViewController_1.swift
 //  Drrrible
 //
-//  Created by Suyeol Jeon on 19/04/2017.
-//  Copyright © 2017 Suyeol Jeon. All rights reserved.
+//  Created by fuyoufang on 2019/12/29.
+//  Copyright © 2019 Suyeol Jeon. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import RxDataSources
 import ReactorKit
 import ReusableKit
 
-final class VersionViewController: BaseViewController, View {
+final class VersionViewController_1: BaseViewController, View {
     
     // MARK: Constants
     
     fileprivate struct Reusable {
-        static let cell = ReusableCell<VersionCell>()
+        static let cell = ReusableCell<VersionCell_1>()
     }
     
     fileprivate struct Metric {
@@ -24,6 +25,10 @@ final class VersionViewController: BaseViewController, View {
         static let iconViewSize = 100.f
         static let iconViewBottom = 0.f
     }
+    
+    // MARK: Properties
+    private let dataSource: RxTableViewSectionedReloadDataSource<VersionCellSection_1>
+    
     
     // MARK: UI
     
@@ -42,8 +47,9 @@ final class VersionViewController: BaseViewController, View {
     
     // MARK: Initializing
     
-    init(reactor: VersionViewReactor) {
+    init(reactor: VersionViewReactor_1) {
         defer { self.reactor = reactor }
+        dataSource = type(of: self).dataSourceFactory()
         super.init()
         self.title = "version".localized
     }
@@ -57,7 +63,6 @@ final class VersionViewController: BaseViewController, View {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .db_background
-        tableView.dataSource = self
         tableView.contentInset.top = Metric.iconViewTop + Metric.iconViewSize + Metric.iconViewBottom
         tableView.addSubview(iconView)
         view.addSubview(self.tableView)
@@ -79,7 +84,7 @@ final class VersionViewController: BaseViewController, View {
     
     // MARK: Binding
     
-    func bind(reactor: VersionViewReactor) {
+    func bind(reactor: VersionViewReactor_1) {
         // Action
         self.rx.viewWillAppear
             .map { _ in Reactor.Action.checkForUpdates }
@@ -88,36 +93,21 @@ final class VersionViewController: BaseViewController, View {
         
         // State
         reactor.state
-            .subscribe(onNext: { [weak self] _ in
-                self?.tableView.reloadData()
-            })
-            .disposed(by: self.disposeBag)
+            .map { $0.sections }
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+    }
+    
+    private static func dataSourceFactory() -> RxTableViewSectionedReloadDataSource<VersionCellSection_1> {
+        return .init(configureCell: { dataSource, tableView, indexPath, item -> UITableViewCell in
+            let cell = tableView.dequeue(Reusable.cell, for: indexPath)
+            cell.reactor = item.reactor
+            return cell
+        })
     }
 }
 
-extension VersionViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(Reusable.cell, for: indexPath)
-        if indexPath.row == 0 {
-            cell.textLabel?.text = "current_version".localized
-            cell.detailTextLabel?.text = self.reactor?.currentState.currentVersion
-            cell.isLoading = false
-        } else {
-            cell.textLabel?.text = "latest_version".localized
-            cell.detailTextLabel?.text = self.reactor?.currentState.latestVersion
-            cell.isLoading = self.reactor?.currentState.isLoading ?? false
-        }
-        return cell
-    }
-    
-}
-
-private final class VersionCell: UITableViewCell {
+private final class VersionCell_1: BaseTableViewCell, View {
     fileprivate let activityIndicatorView = UIActivityIndicatorView(style: .gray)
     
     override var accessoryView: UIView? {
@@ -143,4 +133,68 @@ private final class VersionCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK:
+    func bind(reactor: VersionCellReactor_1) {
+        reactor.state
+            .subscribe(onNext: { [weak self] (state) in
+                self?.textLabel?.text = state.title
+                self?.detailTextLabel?.text = state.detail
+                self?.isLoading = state.isLoading
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+
+enum VersionCellSection_1 {
+    case versions([VersionCellSectionItem_1])
+}
+
+extension VersionCellSection_1: SectionModelType {
+    var items: [VersionCellSectionItem_1] {
+        switch self {
+        case .versions(let sections):
+            return sections
+        }
+    }
+    
+    init(original: Self, items: [VersionCellSectionItem_1]) {
+        switch original {
+        case .versions(let sections):
+            self = .versions(sections)
+        }
+    }
+}
+
+enum VersionCellSectionItem_1 {
+    case currentVersion(VersionCellReactor_1)
+    case latestVersion(VersionCellReactor_1)
+    
+    var reactor: VersionCellReactor_1 {
+        switch self {
+        case .currentVersion(let reactor):
+            return reactor
+        case .latestVersion(let reactor):
+            return reactor
+        }
+    }
+}
+ 
+class VersionCellReactor_1: Reactor {
+    typealias Action = NoAction
+    
+    
+    struct State {
+        let title: String
+        let detail: String?
+        let isLoading: Bool
+    }
+    
+    let initialState: State
+    
+    init(title: String, detail: String?, isLoading: Bool) {
+        initialState = State(title: title, detail: detail, isLoading: isLoading)
+    }
+    
 }

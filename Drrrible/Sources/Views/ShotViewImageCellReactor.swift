@@ -11,16 +11,16 @@ import RxCocoa
 import RxSwift
 
 final class ShotViewImageCellReactor: Reactor {
-  typealias Action = NoAction
-  
-  struct State {
-    var imageURL: URL
-  }
-
-  let initialState: State
-
-  init(shot: Shot) {
-    self.initialState = State(imageURL: shot.imageURLs.hidpi ?? shot.imageURLs.normal)
-    _ = self.state
-  }
+    typealias Action = NoAction
+    
+    struct State {
+        var imageURL: URL
+    }
+    
+    let initialState: State
+    
+    init(shot: Shot) {
+        self.initialState = State(imageURL: shot.imageURLs.hidpi ?? shot.imageURLs.normal)
+        _ = self.state
+    }
 }

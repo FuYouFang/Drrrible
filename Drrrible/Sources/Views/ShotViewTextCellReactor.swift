@@ -11,17 +11,17 @@ import UIKit
 import ReactorKit
 
 final class ShotViewTextCellReactor: Reactor {
-  typealias Action = NoAction
-  
-  struct State {
-    var text: NSAttributedString?
-  }
-
-  let initialState: State
-
-  init(shot: Shot) {
-    let text = shot.text.flatMap { try? NSAttributedString.init(htmlString: $0) }
-    self.initialState = State(text: text)
-    _ = self.state
-  }
+    typealias Action = NoAction
+    
+    struct State {
+        var text: NSAttributedString?
+    }
+    
+    let initialState: State
+    
+    init(shot: Shot) {
+        let text = shot.text.flatMap { try? NSAttributedString.init(htmlString: $0) }
+        self.initialState = State(text: text)
+        _ = self.state
+    }
 }

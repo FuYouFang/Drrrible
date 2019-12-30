@@ -26,7 +26,7 @@ final class SettingsViewController: BaseViewController, View {
     // MARK: Properties
     
     fileprivate let analytics: DrrribleAnalytics
-    fileprivate let versionViewControllerFactory: () -> VersionViewController
+    fileprivate let versionViewControllerFactory: () -> BaseViewController
     fileprivate let presentLoginScreen: () -> Void
     fileprivate let dataSource: RxTableViewSectionedReloadDataSource<SettingsViewSection>
     
@@ -43,7 +43,7 @@ final class SettingsViewController: BaseViewController, View {
     init(
         reactor: SettingsViewReactor,
         analytics: DrrribleAnalytics,
-        versionViewControllerFactory: @escaping () -> VersionViewController,
+        versionViewControllerFactory: @escaping () -> BaseViewController,
         presentLoginScreen: @escaping () -> Void
     ) {
         defer { self.reactor = reactor }

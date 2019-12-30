@@ -11,23 +11,23 @@ import RxCocoa
 import RxSwift
 
 class ShotViewCommentCellReactor: Reactor {
-  typealias Action = NoAction
-
-  struct State {
-    var avatarURL: URL?
-    var name: String
-    var message: NSAttributedString
-  }
-
-  let initialState: State
-
-  init(comment: Comment) {
-    self.initialState = State(
-      avatarURL: comment.user.avatarURL,
-      name: comment.user.name,
-      message: (try? NSAttributedString(htmlString: comment.body))
-        ?? NSAttributedString(string: comment.body)
-    )
-    _ = self.state
-  }
+    typealias Action = NoAction
+    
+    struct State {
+        var avatarURL: URL?
+        var name: String
+        var message: NSAttributedString
+    }
+    
+    let initialState: State
+    
+    init(comment: Comment) {
+        self.initialState = State(
+            avatarURL: comment.user.avatarURL,
+            name: comment.user.name,
+            message: (try? NSAttributedString(htmlString: comment.body))
+                ?? NSAttributedString(string: comment.body)
+        )
+        _ = self.state
+    }
 }
